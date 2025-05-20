@@ -13,15 +13,21 @@
 7. [Pessoas Contribuidoras](#pessoas-contribuidoras)
 8. [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras-do-projeto)
 9. [Outros Produtos Easydata360](#outros-produtos-easydata360)
-10. [Licença](#licença)
+10. [Estrutura de Arquivos](#estrutura-de-arquivos)
+11. [Estrutura do Banco de Dados](#estrutura-do-banco-de-dados)
+12. [Licença](#licença)
 
 ---
 
 ## 📖 Descrição do Projeto
 
-**EasyMoney** é um aplicativo de controle financeiro pessoal desenvolvido pela **Easydata360**, que combina simplicidade, inteligência artificial e tecnologia mobile para ajudar usuários a dominar suas finanças. Ele permite gerenciar receitas, despesas, contas bancárias, despesas fixas, investimentos e metas financeiras de forma intuitiva e centralizada.
+**EasyMoney** é uma solução de controle financeiro pessoal desenvolvida pela **Easydata360**, pensada para oferecer muito mais do que simples registros de entradas e saídas. Combinando **interface amigável**, **tecnologia de ponta** e **inteligência artificial aplicada às finanças**, o aplicativo ajuda usuários a organizarem sua vida financeira, tomarem melhores decisões e planejarem o futuro com clareza e segurança.
 
-Utilizando **React Native** na construção do app, **SQLite** para armazenamento local e **D3.js** para visualizações interativas, o EasyMoney oferece uma experiência fluida, responsiva e analítica. A plataforma permite acompanhar a saúde financeira em tempo real, identificar padrões de consumo e tomar decisões mais assertivas com apoio de relatórios, gráficos e recomendações personalizadas por IA.
+O sistema é construído com foco mobile-first utilizando **React Native**, **PostgreSQL** como banco de dados robusto e escalável, e conteinerização com **Docker** para facilitar a distribuição e implantação em diferentes ambientes. Além disso, conta com dashboards visuais interativos desenvolvidos com **D3.js**, oferecendo análises dinâmicas e personalizadas da saúde financeira do usuário.
+
+Com o apoio de modelos de linguagem (LLMs) como **OpenAI** ou **Gemini**, o EasyMoney transforma-se em um verdadeiro **consultor financeiro digital**. Ele analisa dados em tempo real, simula cenários, propõe metas e oferece sugestões de economia, investimento e controle de dívidas de forma contextualizada e pessoal.
+
+Seja para quem quer sair do vermelho, se planejar para grandes conquistas ou simplesmente entender melhor o próprio dinheiro, o EasyMoney entrega autonomia, clareza e inteligência — tudo na palma da mão.
 
 ---
 
@@ -138,10 +144,13 @@ cd EasyMoney
 ## 🛠 Tecnologias Utilizadas
 
 * **Frontend/App Mobile:** React Native
-* **Banco de Dados Local:** SQLite
-* **Visualização de Dados:** D3.js
-* **Inteligência Artificial:** OpenAI API / Google Gemini (via integração com backend)
-* **Arquitetura planejada:** Mobile-first com migração posterior para Web (React)
+* **Backend e API:** Python (Flask ou FastAPI com arquitetura MVC)
+* **Banco de Dados:** PostgreSQL (alta performance, integridade relacional, multiusuário)
+* **Containerização:** Docker (Docker Compose para orquestração de serviços)
+* **Visualização de Dados:** D3.js (para gráficos e relatórios interativos)
+* **Inteligência Artificial:** Google Gemini (via Google Cloud AI APIs)
+* **Infraestrutura em Nuvem:** Google Cloud Platform (GCP), com escalabilidade e deploy contínuo
+* **Arquitetura planejada:** Mobile-first, escalável, com futura versão Web em React\*\* Mobile-first, escalável, com futura versão Web em React
 
 ---
 
@@ -170,6 +179,202 @@ A Easydata360 desenvolve soluções inteligentes e ágeis. Todos os produtos com
 Saiba mais em nosso site: [Easydata360](https://easydata360.com)
 
 ---
+
+## 🗂️ Estrutura de Arquivos
+
+A estrutura de diretórios do EasyMoney segue boas práticas de desenvolvimento e o padrão arquitetural MVC (Model-View-Controller), implementado tanto no aplicativo React Native quanto no backend em Python (Flask/FastAPI). Essa organização garante escalabilidade, modularidade e facilidade de manutenção para times de desenvolvimento.
+
+```plaintext
+EasyMoney/
+├── app/                         # Aplicativo React Native (camada de visualização)
+│   ├── assets/			 # Logos, ícones, fontes
+│   │   ├── logo.png
+│   │   ├── icons/
+│   ├── components/		 # Componentes reutilizáveis de interface
+│   │   ├── Header.js
+│   │   ├── CardBalance.js
+│   │   ├── TransactionItem.js
+│   ├── screens/		 # Telas principais do app (Dashboard, Lançamentos, etc.)
+│   │   ├── DashboardScreen.js
+│   │   ├── TransactionsScreen.js
+│   │   ├── AccountsScreen.js
+│   │   ├── FixedExpensesScreen.js
+│   │   ├── InvestmentsScreen.js
+│   │   ├── CalendarScreen.js
+│   ├── navigation/		# Definição de rotas e navegação entre telas
+│   │   ├── AppNavigator.js
+│   ├── services/		# Integração com APIs do backend
+│   │   ├── api.js
+│   ├── context/		# Contextos globais (usuário, autenticação, tema)
+│   │   ├── AuthContext.js
+│   │   ├── ThemeContext.js
+│   ├── hooks/			# Hooks personalizados
+│   │   ├── useFetch.js
+│   │   ├── useAuth.js
+│   ├── styles/			# Estilos globais e variáveis de tema
+│   │   ├── colors.js
+│   │   ├── global.js
+│   └── App.js			 # Entrada principal do app
+│
+├── backend/			# Backend Python (Flask/FastAPI com padrão MVC)
+│   ├── app/			# Aplicação principal
+│   │   ├── controllers/	# Controladores: tratam requisições e respostas
+│   │   │   ├── user_controller.py
+│   │   │   ├── transaction_controller.py
+│   │   │   ├── account_controller.py
+│   │   │   ├── investment_controller.py
+│   │   │   ├── fixed_expense_controller.py
+│   │   │   ├── calendar_controller.py
+│   │   ├── models/		# Definições das tabelas e ORM com SQLAlchemy
+│   │   │   ├── user.py
+│   │   │   ├── transaction.py
+│   │   │   ├── account.py
+│   │   │   ├── investment.py
+│   │   │   ├── fixed_expense.py
+│   │   ├── routes/		 # Módulos de rotas organizadas
+│   │   │   ├── user_routes.py
+│   │   │   ├── transaction_routes.py
+│   │   │   ├── account_routes.py
+│   │   ├── services/		# Regras de negócio, integrações com IA e lógica complexa	
+│   │   │   ├── auth_service.py
+│   │   │   ├── investment_service.py
+│   │   │   ├── ai_advisor_service.py  # Integração com IA Gemini
+│   │   ├── middlewares/	# Middlewares (autenticação, validações, erros)
+│   │   │   ├── auth_middleware.py
+│   │   ├── schemas/		# Validação de entrada/saída com Pydantic (se FastAPI)
+│   │   │   ├── transaction_schema.py
+│   │   │   ├── investment_schema.py
+│   │   ├── __init__.py		# Inicialização da aplicação
+│   ├── config/			# Arquivos de configuração do ambiente, banco etc.
+│   │   ├── database.py
+│   │   ├── settings.py
+│   ├── main.py                 # Ponto de entrada da aplicação Flask/FastAPI
+│   ├── requirements.txt	# Dependências do backend
+│
+├── database/ 			# Scripts e versionamento do banco PostgreSQL
+│   ├── migrations/ 		# Scripts de migração (via Alembic ou Flask-Migrate)
+│   │   ├── 001_create_tables.sql
+│   │   ├── 002_add_investments.sql
+│   ├── seeders/		# Dados para popular ambiente de dev
+│   │   ├── sample_users.sql
+│   │   ├── sample_transactions.sql
+│   └── init.sql		# Estrutura inicial para criação do banco
+│
+├── docker/			# Containerização
+│   ├── Dockerfile.backend	# Build do container do backend
+│   ├── Dockerfile.react	# Build do app mobile (usado em CI/CD ou PWA opcional)
+│   └── docker-compose.yml	# Orquestração de backend, db e serviços auxiliares
+│
+├── scripts/			# Scripts auxiliares (deploy, backup, restore)
+│   ├── start.sh		# Inicialização customizada do containe
+│   ├── reset_db.sh
+│
+├── .env			# Variáveis de ambiente (não versionado)
+├── .gitignore			# Ignora arquivos sensíveis e cache
+├── README.md			# Documentação principal do projeto
+├── Makefile			# Comandos simplificados para devops/test/build
+└── LICENSE
+
+```
+
+Essa estrutura promove:
+
+* Separação de responsabilidades (MVC);
+* Flexibilidade para escalar ou trocar camadas do sistema;
+* Facilidade de testes e manutenção;
+* Integração facilitada com ferramentas de CI/CD e DevOps.
+
+## 🧩 Estrutura do Banco de Dados
+
+O banco de dados do EasyMoney utiliza **PostgreSQL** e é modelado com foco em integridade relacional, performance e extensibilidade. A seguir, está o detalhamento das principais tabelas e seus relacionamentos:
+
+### 🔹 Tabela: `usuarios`
+
+Armazena os dados dos usuários da aplicação.
+
+```sql
+id SERIAL PRIMARY KEY,
+nome TEXT NOT NULL,
+email TEXT UNIQUE NOT NULL,
+senha TEXT NOT NULL,
+criado_em TIMESTAMP DEFAULT NOW()
+```
+
+### 🔹 Tabela: `contas_bancarias`
+
+Contas utilizadas para movimentações e investimentos.
+
+```sql
+id SERIAL PRIMARY KEY,
+usuario_id INTEGER REFERENCES usuarios(id),
+nome TEXT NOT NULL,
+tipo TEXT NOT NULL, -- ex: corrente, poupança
+saldo_inicial NUMERIC(10,2) DEFAULT 0
+```
+
+### 🔹 Tabela: `categorias`
+
+Categorias de transações financeiras.
+
+```sql
+id SERIAL PRIMARY KEY,
+nome TEXT NOT NULL,
+tipo TEXT CHECK (tipo IN ('entrada', 'saida')),
+usuario_id INTEGER REFERENCES usuarios(id)
+```
+
+### 🔹 Tabela: `lancamentos`
+
+Movimentações financeiras de entrada e saída.
+
+```sql
+id SERIAL PRIMARY KEY,
+data DATE NOT NULL,
+descricao TEXT,
+valor NUMERIC(10,2) NOT NULL,
+tipo TEXT CHECK (tipo IN ('entrada', 'saida')),
+categoria_id INTEGER REFERENCES categorias(id),
+conta_id INTEGER REFERENCES contas_bancarias(id),
+usuario_id INTEGER REFERENCES usuarios(id),
+parcela TEXT
+```
+
+### 🔹 Tabela: `despesas_fixas`
+
+Despesas mensais recorrentes.
+
+```sql
+id SERIAL PRIMARY KEY,
+nome TEXT NOT NULL,
+valor NUMERIC(10,2) NOT NULL,
+vencimento INTEGER CHECK (vencimento BETWEEN 1 AND 31),
+conta_id INTEGER REFERENCES contas_bancarias(id),
+usuario_id INTEGER REFERENCES usuarios(id)
+```
+
+### 🔹 Tabela: `investimentos`
+
+Investimentos realizados pelos usuários.
+
+```sql
+id SERIAL PRIMARY KEY,
+data DATE NOT NULL,
+tipo TEXT NOT NULL, -- ex: ações, cripto
+item TEXT NOT NULL, -- ex: PETR4, Bitcoin
+valor_compra NUMERIC(10,2) NOT NULL,
+preco_atual NUMERIC(10,2),
+frequencia_pagamento TEXT, -- mensal, trimestral, etc.
+valor_recebido NUMERIC(10,2),
+conta_id INTEGER REFERENCES contas_bancarias(id),
+usuario_id INTEGER REFERENCES usuarios(id)
+```
+
+Essa estrutura permite:
+
+* Relacionar todas as informações financeiras por usuário;
+* Garantir segurança e isolamento de dados multiusuário;
+* Integrar facilmente com análises preditivas e inteligência artificial;
+* Facilitar geração de relatórios complexos e dashboards.
 
 ## 📜 Licença
 
